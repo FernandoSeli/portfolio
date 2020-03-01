@@ -1,5 +1,5 @@
 
-$toolbar-height:64px;
+$toolbar-height:60px;
 
 mat-toolbar {
   position: fixed;
@@ -9,12 +9,24 @@ mat-toolbar {
   z-index: 998;
   padding: 0px 20px;
   height: $toolbar-height;
+
+  button.is-active{
+    border-bottom: 5px solid white;
+  }
 }
 
 mat-sidenav {
   padding-top: $toolbar-height;
   width:100%;
 
+  div.hero-body{
+    h1{
+      line-height: 40px;
+    }
+    div.container{
+      margin: 15px;
+    }
+  }
 
   div.content{
     height:100%;
