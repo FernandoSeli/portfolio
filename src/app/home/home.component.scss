@@ -19,14 +19,6 @@ mat-sidenav {
   padding-top: $toolbar-height;
   width:100%;
 
-  div.hero-body{
-    h1{
-      line-height: 40px;
-    }
-    div.container{
-      margin: 15px;
-    }
-  }
 
   div.content{
     height:100%;
@@ -37,6 +29,21 @@ mat-sidenav {
     }
     button.link{
       margin: 20px;
+    }
+  }
+}
+
+mat-sidenav-content{
+  section.blue-gradient {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+
+    div.hero-body{
+      h1{
+        line-height: 40px;
+      }
+      div.container{
+        margin: 15px;
+      }
     }
   }
 }

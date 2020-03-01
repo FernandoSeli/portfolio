@@ -11,11 +11,6 @@ import {
 } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-enum VisibilityState {
-  Visible = 'visible',
-  Hidden = 'hidden'
-}
-
 enum Direction {
   Up = 'Up',
   Down = 'Down'
@@ -45,12 +40,14 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('technologies') technologies:ElementRef;
   @ViewChild('contact') contact:ElementRef;
 
- isVisible = true;
+  isVisible = false;
   currentActive: number;
 
   constructor() { }
 
   ngAfterViewInit() {
+    this.isVisible = false;
+
     const scroll$ = fromEvent(window, 'scroll').pipe(
       throttleTime(10),
       map(() => window.pageYOffset),
@@ -70,11 +67,11 @@ export class HomeComponent implements AfterViewInit {
 
     goingUp$.subscribe(() => (this.isVisible = true));
     goingDown$.subscribe(() => (this.isVisible = false));
+
   }
 
   checkSideNav() {
     if(this.sideNav !== undefined){
-
       if(this.sideNav._width > 768){
         this.sideNav.close();
       }
@@ -112,6 +109,10 @@ export class HomeComponent implements AfterViewInit {
       this.currentActive = 4;
     } else {
       this.currentActive = 0;
+    }
+
+    if(window.pageYOffset <= this.aboutMe.nativeElement.offsetTop - 100){
+      this.isVisible = false;
     }
   }
 }
