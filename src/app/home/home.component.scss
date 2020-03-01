@@ -1,0 +1,48 @@
+
+$toolbar-height:64px;
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  padding: 0px 20px;
+  height: $toolbar-height;
+}
+
+mat-sidenav {
+  padding-top: $toolbar-height;
+  width:100%;
+
+
+  div.content{
+    height:100%;
+    button.list{
+      margin: 0px;
+      width:100%;
+      // border: 10px transparent;
+    }
+    button.link{
+      margin: 20px;
+    }
+  }
+}
+
+// app-home{
+//   scroll-snap-type: y mandatory;
+//   // scroll-padding-top: 150px;
+//   overflow-y: scroll;
+
+
+// }
+section.section{
+  scroll-snap-align: start;
+}
+button.action {
+  margin: 0px 10px;
+}
+
+button.link {
+  margin: 0px 5px;
+}
