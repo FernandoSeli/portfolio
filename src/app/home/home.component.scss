@@ -1,61 +1,97 @@
-
-$toolbar-height:60px;
-
-mat-toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 998;
-  padding: 0px 20px;
-  height: $toolbar-height;
-
-  button.is-active{
-    border-bottom: 5px solid white;
-  }
-}
-
-mat-sidenav {
-  padding-top: $toolbar-height;
-  width:100%;
-
-
-  div.content{
-    height:100%;
-    button.list{
-      margin: 0px;
-      width:100%;
-      // border: 10px transparent;
-    }
-    button.link{
-      margin: 20px;
-    }
-  }
-}
-
-mat-sidenav-content{
-  section.blue-gradient {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-
-    div.hero-body{
-      h1{
+$corner-bevel: 100;
+$max-width-name-container: 430px;
+section.background-me {
+  background-image: url("../../assets/photo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  div.hero-body {
+    background-color: white;
+    opacity: 0.7;
+    div.container {
+      h1 {
         line-height: 40px;
-      }
-      div.container{
-        margin: 15px;
+        border-bottom: 2px solid black;
       }
     }
   }
 }
+
+@media (min-width: 968px) {
+  div.hero-body {
+    width: 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+    position: absolute;
+    right: 0;
+    height: 100%;
+
+    div.container {
+      max-width: $max-width-name-container;
+      h1 {
+        margin-left: 20px;
+        padding-bottom: 25px;
+      }
+    }
+  }
+}
+
+@media (max-width: 968px) {
+  div.hero-body {
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    div.container {
+      max-width: $max-width-name-container;
+      h1 {
+        padding-bottom: 25px;
+      }
+    }
+  }
+}
+
+@media (max-width: 510px) {
+  section.background-me {
+    background-image: url("../../assets/photoSmall.jpg");
+  }
+  div.hero-body {
+    div.container {
+      h1 {
+        font-size: 41px;
+      }
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  div.hero-body {
+    div.container {
+      h1 {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  div.hero-body {
+    div.container {
+      h1 {
+        font-size: 29px;
+      }
+    }
+  }
+}
+
+//background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 
 // app-home{
 //   scroll-snap-type: y mandatory;
 //   // scroll-padding-top: 150px;
 //   overflow-y: scroll;
 
-
 // }
-section.section{
+section.section {
   scroll-snap-align: start;
 }
 button.action {
