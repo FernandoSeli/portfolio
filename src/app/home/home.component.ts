@@ -13,6 +13,7 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { trigger, style, transition, animate } from "@angular/animations";
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -30,7 +31,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  styleUrls: ["./home.component.scss"],
+  animations: [
+    trigger("fade", [
+      transition("void => *", [
+        style({ opacity: 0 }),
+        animate(1500, style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   @ViewChild("aboutMe") aboutMe: ElementRef;
