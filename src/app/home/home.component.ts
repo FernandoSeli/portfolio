@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.setVhToWindowHeight();
+    // this.setVhToWindowHeight();
 
     this.contactForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
@@ -65,13 +65,13 @@ export class HomeComponent implements OnInit {
     this.messageFormControl = this.contactForm.controls["message"];
   }
 
-  @HostListener("window:resize")
-  setVhToWindowHeight() {
-    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-    let vh = window.innerHeight * 0.01;
-    // Then we set the value in the --vh custom property to the root of the document
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }
+  // @HostListener("window:resize")
+  // setVhToWindowHeight() {
+  //   // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+  //   let vh = window.innerHeight * 0.01;
+  //   // Then we set the value in the --vh custom property to the root of the document
+  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  // }
 
   scrollToAboutMe() {
     this.aboutMe.nativeElement.scrollIntoView({
