@@ -14,6 +14,8 @@ import {
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { trigger, style, transition, animate } from "@angular/animations";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { AppService } from "../app.service";
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -56,9 +58,13 @@ export class HomeComponent implements OnInit {
   emailFormControl: any;
   nameFormControl: any;
   messageFormControl: any;
-  formSubmitted = false;
+  messageSentSuccess: boolean;
+  formNotification = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private appService: AppService
+  ) {}
 
   ngOnInit() {
     // this.setVhToWindowHeight();
@@ -115,9 +121,23 @@ export class HomeComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.emailFormControl.value);
-    console.log(this.nameFormControl.value);
-    console.log(this.messageFormControl.value);
-    this.formSubmitted = true;
+    this.appService.postToSheets(
+      this.emailFormControl.value,
+      this.nameFormControl.value,
+      this.messageFormControl.value
+    ).subscribe((response: any) => {
+      if (response.result === "success"){
+        this.messageSentSuccess = true;
+      }
+      else{
+        this.messageSentSuccess = true;
+      }
+    this.formNotification = true;
+
+    });
+  }
+  changeNotificationStatus(status: boolean){
+    this.formNotification = status;
+
   }
 }

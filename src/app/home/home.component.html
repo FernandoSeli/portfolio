@@ -98,7 +98,7 @@
       </h4>
       <div class="container">
         <div class="columns is-multiline features">
-          <div class="column is-half ">
+          <div class="column is-half-tablet is-one-third-fullhd">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <p class="card-header-title">
@@ -126,7 +126,7 @@
               </footer>
             </div>
           </div>
-          <div class="column is-half ">
+          <div class="column is-half-tablet  is-one-third-fullhd">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <div>
@@ -158,7 +158,7 @@
               </footer>
             </div>
           </div>
-          <div class="column is-half">
+          <div class="column is-half-tablet  is-one-third-fullhd">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <p class="card-header-title">
@@ -224,9 +224,20 @@
       Send me a message
     </h4>
   </div>
-  <div *ngIf="formSubmitted" class="notification is-info">
-    <p class="is-size-4">Message Sent Successfully</p>
-  </div>
+  <ng-container *ngIf="formNotification">
+    <div *ngIf="messageSentSuccess" class="notification is-info has-text-left">
+      <button class="delete" (click)="changeNotificationStatus(false)"></button>
+      Message Sent Successfully
+    </div>
+
+    <div
+      *ngIf="!messageSentSuccess"
+      class="notification is-danger has-text-left"
+    >
+      <button class="delete" (click)="changeNotificationStatus(false)"></button>
+      Failed Sending Message
+    </div>
+  </ng-container>
   <form [formGroup]="contactForm" class="form has-text-centered contact-column">
     <mat-form-field class="full-width">
       <mat-label>Name</mat-label>
@@ -280,6 +291,7 @@
       mat-button
       class="button is-medium is-success action"
       (click)="submitForm()"
+      [disabled]="!contactForm.valid"
     >
       <span class="icon">
         <i class="fas fa-envelope"></i>
