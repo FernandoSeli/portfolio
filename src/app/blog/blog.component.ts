@@ -50,8 +50,6 @@ export class BlogComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit() {
-    this.isVisible = false;
-
     const scroll$ = fromEvent(window, "scroll").pipe(
       throttleTime(10),
       map(() => window.pageYOffset),

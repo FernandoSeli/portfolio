@@ -76,7 +76,16 @@ section.about-me-section {
     top: 0;
     left: 0;
     z-index: -100;
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0)
+      ),
+      linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+
+    // .whitegradient {
+    //   height: 100%;
+    // }
   }
 }
 

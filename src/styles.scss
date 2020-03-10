@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Lato, "Helvetica Neue", sans-serif;
+}
 
 /* region bulma */
 // 1. Import the initial variables
@@ -37,9 +43,18 @@ $github-invert: findColorInvert($github);
 // 5. Add new color variables to the color map.
 @import "../node_modules/bulma/sass/utilities/derived-variables";
 $addColors: (
-  "twitter":($twitter, $twitter-invert),
-  "linkedin": ($linkedin, $linkedin-invert),
-  "github": ($github, $github-invert)
+  "twitter": (
+    $twitter,
+    $twitter-invert
+  ),
+  "linkedin": (
+    $linkedin,
+    $linkedin-invert
+  ),
+  "github": (
+    $github,
+    $github-invert
+  )
 );
 $colors: map-merge($colors, $addColors);
 
