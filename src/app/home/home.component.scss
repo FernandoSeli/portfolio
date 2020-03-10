@@ -6,11 +6,16 @@ section.background-me {
   background-repeat: no-repeat;
   background-size: cover;
 
+  max-height: 100vh;
+  // min-
   min-height: calc(var(--vh, 1vh) * 100);
+  max-height: calc(var(--vh, 1vh) * 100);
   div.hero-body {
     background-color: white;
     opacity: 0.7;
     div.container {
+      // margin-top: auto;
+      // margin-bottom: auto;
       margin-top: 15px;
       margin-bottom: 15px;
       h1 {
