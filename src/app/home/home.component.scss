@@ -6,8 +6,6 @@ section.background-me {
   background-repeat: no-repeat;
   background-size: cover;
 
-  min-height: 100%;
-  min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   div.hero-body {
     background-color: white;

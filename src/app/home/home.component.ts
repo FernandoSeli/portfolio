@@ -1,30 +1,10 @@
 import {
   Component,
   OnInit,
-  AfterViewChecked,
   ViewChild,
   ElementRef,
-  AfterViewInit,
-  HostBinding,
   HostListener
 } from "@angular/core";
-import { MatSidenav } from "@angular/material/sidenav";
-import { fromEvent } from "rxjs";
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  pairwise,
-  share,
-  throttleTime
-} from "rxjs/operators";
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate
-} from "@angular/animations";
 import {
   FormControl,
   FormGroupDirective,
@@ -72,6 +52,8 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.setVhToWindowHeight();
+
     this.contactForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       name: ["", Validators.required],
@@ -82,6 +64,15 @@ export class HomeComponent implements OnInit {
     this.nameFormControl = this.contactForm.controls["name"];
     this.messageFormControl = this.contactForm.controls["message"];
   }
+
+  @HostListener("window:resize")
+  setVhToWindowHeight() {
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+
   scrollToAboutMe() {
     this.aboutMe.nativeElement.scrollIntoView({
       behavior: "smooth",
