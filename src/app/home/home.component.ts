@@ -25,13 +25,34 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import {
+  FormControl,
+  FormGroupDirective,
+  Validators,
+  NgForm,
+  FormBuilder
+} from "@angular/forms";
+import { ErrorStateMatcher } from "@angular/material/core";
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   @ViewChild("aboutMe") aboutMe: ElementRef;
   @ViewChild("projects") projects: ElementRef;
   @ViewChild("technologies") technologies: ElementRef;
@@ -41,8 +62,26 @@ export class HomeComponent {
   currentActive: number;
   hiPadding: any;
 
-  constructor() {}
+  matcher = new MyErrorStateMatcher();
+  contactForm: any;
+  emailFormControl: any;
+  nameFormControl: any;
+  messageFormControl: any;
+  formSubmitted = false;
 
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.contactForm = this.formBuilder.group({
+      email: ["", [Validators.required, Validators.email]],
+      name: ["", Validators.required],
+      message: ["", Validators.required]
+    });
+
+    this.emailFormControl = this.contactForm.controls["email"];
+    this.nameFormControl = this.contactForm.controls["name"];
+    this.messageFormControl = this.contactForm.controls["message"];
+  }
   scrollToAboutMe() {
     this.aboutMe.nativeElement.scrollIntoView({
       behavior: "smooth",
@@ -73,5 +112,12 @@ export class HomeComponent {
       block: "start",
       inline: "nearest"
     });
+  }
+
+  submitForm() {
+    console.log(this.emailFormControl.value);
+    console.log(this.nameFormControl.value);
+    console.log(this.messageFormControl.value);
+    this.formSubmitted = true;
   }
 }
