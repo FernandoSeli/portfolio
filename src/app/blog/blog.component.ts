@@ -6,17 +6,20 @@ import {
   ElementRef,
   AfterViewInit,
   HostBinding,
-  HostListener
+  HostListener,
+  ViewChildren,
+  QueryList
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
-import { fromEvent } from "rxjs";
+import { fromEvent, Observable } from "rxjs";
 import {
   distinctUntilChanged,
   filter,
   map,
   pairwise,
   share,
-  throttleTime
+  throttleTime,
+  switchMap
 } from "rxjs/operators";
 import {
   trigger,
@@ -25,6 +28,7 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import { RouterOutlet, Router, ActivatedRoute } from "@angular/router";
 
 enum Direction {
   Up = "Up",
@@ -43,12 +47,19 @@ enum Direction {
     ])
   ]
 })
-export class BlogComponent implements AfterViewInit {
+export class BlogComponent implements OnInit, AfterViewInit {
   @ViewChild("sideNav") sideNav: MatSidenav;
-  isVisible: boolean;
+  @ViewChildren("entry") entries: QueryList<ElementRef>;
+  isVisible = true;
+  sessionEntry: Observable<string>;
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
+  ngOnInit() {
+    this.sessionEntry = this.route.queryParamMap.pipe(
+      map(params => params.get("entry") || "None")
+    );
+  }
   ngAfterViewInit() {
     const scroll$ = fromEvent(window, "scroll").pipe(
       throttleTime(10),
@@ -69,6 +80,7 @@ export class BlogComponent implements AfterViewInit {
 
     goingUp$.subscribe(() => (this.isVisible = true));
     goingDown$.subscribe(() => (this.isVisible = false));
+    this.sessionEntry.subscribe(value => this.smoothScrollToElement(value));
   }
 
   checkSideNav() {
@@ -96,4 +108,22 @@ export class BlogComponent implements AfterViewInit {
   //     this.currentActive = 0;
   //   }
   // }
+
+  navToHome() {
+    this.router.navigateByUrl("");
+  }
+
+  smoothScrollToElement(elementId: string) {
+    console.log(elementId);
+    for (let entry of this.entries) {
+      if (entry.nativeElement.id === elementId) {
+        entry.nativeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest"
+        });
+        return;
+      }
+    }
+  }
 }
