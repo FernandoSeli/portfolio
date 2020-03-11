@@ -114,7 +114,6 @@ export class BlogComponent implements OnInit, AfterViewInit {
   }
 
   smoothScrollToElement(elementId: string) {
-    console.log(elementId);
     for (let entry of this.entries) {
       if (entry.nativeElement.id === elementId) {
         entry.nativeElement.scrollIntoView({
