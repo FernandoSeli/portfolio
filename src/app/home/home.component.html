@@ -98,7 +98,7 @@
       </h4>
       <div class="container">
         <div class="columns is-multiline features">
-          <div class="column is-half-tablet is-one-third-fullhd">
+          <div class="column is-half-tablet is-one-third-widescreen">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <p class="card-header-title">
@@ -112,26 +112,28 @@
 
                 <div class="tag-container">
                   <span class="tag is-default">TFS</span>
-                  <span class="tag is-default">BDD</span>
+                  <span class="tag is-default">Gherkin</span>
                 </div>
                 <p class="has-text-justified">
                   Bachelor's thesis on the development of a Continous
                   Integration Continuous Deployment Pipeline using Team
                   Foundation Server for an Angular web application to integrate
-                  executable specifications with BDD.
+                  executable specifications with Gherkin.
                 </p>
               </div>
               <footer class="card-footer">
-                <a href="#" class="card-footer-item">Learn more</a>
+                <a (click)="navigateToBlog('cicd')" class="card-footer-item"
+                  >Learn more</a
+                >
               </footer>
             </div>
           </div>
-          <div class="column is-half-tablet  is-one-third-fullhd">
+          <div class="column is-half-tablet  is-one-third-widescreen">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <div>
                   <p class="card-header-title">
-                    <span>Full Stack</span>
+                    <span>Full Stack Development</span>
                   </p>
                 </div>
               </header>
@@ -154,11 +156,15 @@
               </div>
 
               <footer class="card-footer">
-                <a href="#" class="card-footer-item">Learn more</a>
+                <a
+                  (click)="navigateToBlog('fullStack')"
+                  class="card-footer-item"
+                  >Learn more</a
+                >
               </footer>
             </div>
           </div>
-          <div class="column is-half-tablet  is-one-third-fullhd">
+          <div class="column is-half-tablet  is-one-third-widescreen">
             <div class="card is-shady equal-height">
               <header class="card-header">
                 <p class="card-header-title">
@@ -181,7 +187,9 @@
               </div>
 
               <footer class="card-footer">
-                <a href="#" class="card-footer-item">Learn more</a>
+                <a (click)="navigateToBlog('neural')" class="card-footer-item"
+                  >Learn more</a
+                >
               </footer>
             </div>
           </div>

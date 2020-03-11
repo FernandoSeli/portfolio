@@ -16,6 +16,7 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { trigger, style, transition, animate } from "@angular/animations";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { AppService } from "../app.service";
+import { Router } from "@angular/router";
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -63,7 +64,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -88,56 +90,31 @@ export class HomeComponent implements OnInit {
   //   document.documentElement.style.setProperty("--vh", `${vh}px`);
   // }
 
-  scrollToAboutMe() {
-    this.aboutMe.nativeElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
-  }
-
-  scrollToProjects() {
-    this.projects.nativeElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
-  }
-
-  scrollToTechnologies() {
-    this.technologies.nativeElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
-  }
-
-  scrollToContact() {
-    this.contact.nativeElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
-  }
-
   submitForm() {
-    this.appService.postToSheets(
-      this.emailFormControl.value,
-      this.nameFormControl.value,
-      this.messageFormControl.value
-    ).subscribe((response: any) => {
-      if (response.result === "success"){
-        this.messageSentSuccess = true;
-      }
-      else{
-        this.messageSentSuccess = true;
-      }
-    this.formNotification = true;
-
-    });
+    this.appService
+      .postToSheets(
+        this.emailFormControl.value,
+        this.nameFormControl.value,
+        this.messageFormControl.value
+      )
+      .subscribe((response: any) => {
+        if (response.result === "success") {
+          this.messageSentSuccess = true;
+        } else {
+          this.messageSentSuccess = true;
+        }
+        this.formNotification = true;
+      });
   }
-  changeNotificationStatus(status: boolean){
+  changeNotificationStatus(status: boolean) {
     this.formNotification = status;
+  }
 
+  navigateToBlog(entry: string) {
+    if (entry.length !== 0) {
+      this.router.navigate(["/blog"], { queryParams: { entry: entry } });
+    } else {
+      this.router.navigate(["/blog"]);
+    }
   }
 }
